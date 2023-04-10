@@ -15,7 +15,7 @@
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
 
 locals {
-  region    = "us-east-2"      #Choose your AWS region you want to build in
+  region    = "us-west-2"      #Choose your AWS region you want to build in
   node_type = "cache.r5.large" # See above recommended instance types for Intel Xeon processors 
 
   tags = {
