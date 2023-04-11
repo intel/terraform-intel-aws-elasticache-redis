@@ -6,7 +6,7 @@
 ####     Intel      ####
 ########################
 # At the time of the publication of this module AWS Elasticache Redis clusters only support the 1st or 2nd generation Intel Xeon Platinum 8000 series processor (Skylake-SP or Cascade Lake). We recommend leveraging the Intel Xeon 3rd or 4th Generation Scalable processors (Ice Lake or Saphire Rapids) when AWS makes them available for Elasticache.
-# 
+#
 # Recommended Intel supported Instance types:
 #
 # General Purpose: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge
@@ -16,7 +16,7 @@
 
 locals {
   region    = "us-west-2"      #Choose your AWS region you want to build in
-  node_type = "cache.r5.large" # See above recommended instance types for Intel Xeon processors 
+  node_type = "cache.r5.large" # See above recommended instance types for Intel Xeon processors
 
   tags = {
     Owner    = "user@company.com"
@@ -44,7 +44,7 @@ module "vpc" {
 }
 
 module "elasticache_redis" {
-  source             = "../../"
+   source             = "../../"
   name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
   num_cache_clusters = 3
   node_type          = local.node_type
@@ -60,12 +60,13 @@ module "elasticache_redis" {
   family                     = "redis6.x"
   description = "Redis Cluster"
 
-  subnet_ids         = module.vpc.public_subnets
+  subnet_ids         = module.vpc.private_subnets
   vpc_id             = module.vpc.vpc_id
   source_cidr_blocks = [module.vpc.vpc_cidr_block]
 
-  tags = {
-    Environment = "prod"
-  }
+locals {
+
+}
+
 }
 
