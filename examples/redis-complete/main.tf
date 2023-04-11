@@ -44,7 +44,7 @@ module "vpc" {
 }
 
 module "elasticache_redis" {
-   source             = "../../"
+  source             = "../../"
   name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
   num_cache_clusters = 3
   node_type          = local.node_type
@@ -64,9 +64,6 @@ module "elasticache_redis" {
   vpc_id             = module.vpc.vpc_id
   source_cidr_blocks = [module.vpc.vpc_cidr_block]
 
-locals {
-
-}
 
 }
 
