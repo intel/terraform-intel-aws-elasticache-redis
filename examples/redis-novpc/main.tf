@@ -29,7 +29,7 @@ locals {
 
 module "elasticache_redis" {
   source             = "../../"
-  name               = "ApplicationName_Prod" #Name of the Redis cluster you are creating.
+  name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
   num_cache_clusters = 3
   node_type          = local.node_type
   engine_version             = "6.x"
@@ -53,4 +53,4 @@ locals {
 
 }
 
-data "aws_availability_zones" "available" {}
+# data "aws_availability_zones" "available" {}
