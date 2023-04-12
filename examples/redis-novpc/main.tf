@@ -15,12 +15,12 @@
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
 
 locals {
-  region    = "us-west-2"      # Choose your AWS region you want to build in
-  node_type = "cache.r5.large" # See above recommended instance types for Intel Xeon processors 
-  vpc_id = "vpc-0787c6805bff6175f" # Replace with the ID of the vpc you want to deploy to.
-  cidr_block = "10.0.0.0/16" # Enter the CIDR range of the VPC you are deploying in.
-  public_subnets  = ["subnet-075580637758afd4d", "subnet-02981998201b23862", "subnet-0e705f1b5a4080a1b"] # Enter the subnet ID's for your PUBLIC subnets of the VPC you want to deploy to
-  private_subnets = ["subnet-0b52f177e487bcfad", "subnet-09aa7f95c2a40279b", "subnet-013c2faa7514d17e7"] # Enter the subnet ID's for your PRIVATE subnets of the VPC you want to deploy to
+  region          = "us-west-2"                                                                          # Choose your AWS region you want to build in
+  node_type       = "cache.r5.large"                                                                     # See above recommended instance types for Intel Xeon processors 
+  vpc_id          = "vpc-0f44f4c930cd92d12"                                                              # Replace with the ID of the vpc you want to deploy to.
+  cidr_block      = "10.0.0.0/16"                                                                        # Enter the CIDR range of the VPC you are deploying in.
+  public_subnets  = ["subnet-0214898df0642887f", "subnet-053447910c094adb4", "subnet-07c86fb3b6841d740"] # Enter the subnet ID's for your PUBLIC subnets of the VPC you want to deploy to
+  private_subnets = ["subnet-06c1d82e2cb3dd953", "subnet-02cf7a8fcd152d1a8", "subnet-0fd4d8bfb61b23f99"] # Enter the subnet ID's for your PRIVATE subnets of the VPC you want to deploy to
   tags = {
     Owner    = "user@company.com"
     Duration = "24"
@@ -28,10 +28,10 @@ locals {
 }
 
 module "elasticache_redis" {
-  source             = "../../"
-  name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
-  num_cache_clusters = 3
-  node_type          = local.node_type
+  source                     = "intel/elasticache-redis/intel"
+  name                       = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
+  num_cache_clusters         = 3
+  node_type                  = local.node_type
   engine_version             = "6.x"
   port                       = 6379
   maintenance_window         = "mon:10:40-mon:11:40"
@@ -42,7 +42,7 @@ module "elasticache_redis" {
   transit_encryption_enabled = false
   apply_immediately          = true
   family                     = "redis6.x"
-  description = "Redis Cluster"
+  description                = "Redis Cluster"
 
   subnet_ids         = local.private_subnets
   vpc_id             = local.vpc_id

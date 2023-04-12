@@ -100,7 +100,7 @@ No resources.
 | at_rest_encryption_enabled | Whether to enable encryption at rest.                                                                                     | `bool`         | `true`                   |    no    |
 | automatic_failover_enabled | Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. | `bool`         | `true`                   |    no    |
 | description                | The description of the all resources.                                                                                     | `string`       | `"Managed by Terraform"` |    no    |
-| engine_version             | The version number of the cache engine to be used for the cache clusters in this replication group.                       | `string`       | `"6.x.6"`                |    no    |
+| engine_version             | The version number of the cache engine to be used for the cache clusters in this replication group.                       | `string`       | `"6.x"`                |    no    |
 | family                     | The family of the ElastiCache parameter group.                                                                            | `string`       | `"redis6.0"`             |    no    |
 | maintenance_window         | Specifies the weekly time range for when maintenance on the cache cluster is performed.                                   | `string`       | `""`                     |    no    |
 | port                       | The port number on which each of the cache nodes will accept connections.                                                 | `number`       | `6379`                   |    no    |
