@@ -13,7 +13,20 @@ This example creates an Amazon Elasticache Redis Cluster based on Intel and crea
 As you configure your application's environment, choose the configurations for your infrastructure that matches your application's requirements.
 
 
+
 ## Usage
+
+## Description
+This module provisions [ElastiCache_Replication_Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.html) and
+[Parameter Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html).
+
+This module builds using recommended settings:
+
+- Enable Multi-AZ
+- Enable automatic failover
+- Enable at-rest encryption
+- Enable in-transit encryption
+- Enable automated backups
 
 By default, you will only have to pass three variables
 
@@ -136,8 +149,8 @@ No resources.
 | at_rest_encryption_enabled | Whether to enable encryption at rest.                                                                                     | `bool`         | `true`                   |    no    |
 | automatic_failover_enabled | Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. | `bool`         | `true`                   |    no    |
 | description                | The description of the all resources.                                                                                     | `string`       | `"Managed by Terraform"` |    no    |
-| engine_version             | The version number of the cache engine to be used for the cache clusters in this replication group.                       | `string`       | `"5.0.6"`                |    no    |
-| family                     | The family of the ElastiCache parameter group.                                                                            | `string`       | `"redis5.0"`             |    no    |
+| engine_version             | The version number of the cache engine to be used for the cache clusters in this replication group.                       | `string`       | `"6.x.6"`                |    no    |
+| family                     | The family of the ElastiCache parameter group.                                                                            | `string`       | `"redis6.0"`             |    no    |
 | maintenance_window         | Specifies the weekly time range for when maintenance on the cache cluster is performed.                                   | `string`       | `""`                     |    no    |
 | port                       | The port number on which each of the cache nodes will accept connections.                                                 | `number`       | `6379`                   |    no    |
 | snapshot_retention_limit   | The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them.              | `number`       | `30`                     |    no    |
