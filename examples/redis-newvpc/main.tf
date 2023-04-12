@@ -25,7 +25,7 @@ locals {
 }
 
 module "vpc" {
-  source  = "/../../"
+  source  = "../../"
   version = "~> 3.0"
   cidr    = "10.99.0.0/18"          #Choose the cidr block you want to use for your VPC
   name    = "vpc-elasticache-redis" #Choose the name you want to give the VPC
