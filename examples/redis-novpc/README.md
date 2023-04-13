@@ -28,7 +28,7 @@ This module requires a vpc with multiple AZ's (3)
 - Enable in-transit encryption
 - Enable automated backups
 
-By default, you will only have to pass these variables
+By default, you will only have to pass these variables in the **/examples/redis-novpc/main.tf** file
 
 ```hcl
 region
@@ -40,32 +40,18 @@ private_subnets
 Any tags you wish to have applied
 ```
 
-
-main.tf
-
 ```hcl
-# The subnets will be used to create the Elasticache Cluster.  In the elasticache_redis module you can adjust the name of the cluster, version, maintenance windows and encryption as desired.
-
-module "elasticache_redis" {
-  source             = "../../"
-  name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
-  num_cache_clusters = 3
-  node_type          = local.node_type
-  engine_version             = "6.x"
-  port                       = 6379
-  maintenance_window         = "mon:10:40-mon:11:40"
-  snapshot_window            = "09:10-10:10"
-  snapshot_retention_limit   = 1
-  automatic_failover_enabled = false
-  at_rest_encryption_enabled = false
-  transit_encryption_enabled = false
-  apply_immediately          = true
-  family                     = "redis6.x"
-  description = "Redis Cluster"
-
-  subnet_ids         = local.private_subnets
-  vpc_id             = local.vpc_id
-  source_cidr_blocks = [local.cidr_block]
+locals {
+  region          = "us-west-2"
+  node_type       = "cache.r5.large" 
+  vpc_id          = "vpc-01234abcd"
+  cidr_block      = "10.0.0.0/16" 
+  public_subnets  = ["subnet-0123zoneA", "subnet-0123zoneB", "subnet-0213zoneC"] 
+  private_subnets = ["subnet-abcdzoneA", "subnet-abcdzoneB", "subnet-abcdzoneC"] 
+  tags = {
+    Owner    = "user@company.com"
+    Duration = "24"
+  }
 }
 ```
 

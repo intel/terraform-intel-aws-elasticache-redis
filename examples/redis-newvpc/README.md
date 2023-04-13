@@ -28,7 +28,7 @@ This module builds using recommended settings:
 - Enable in-transit encryption
 - Enable automated backups
 
-By default, you will only have to pass three variables
+By default, you will only have to pass these variables in the **/examples/redis-newvpc/main.tf** file
 
 ```hcl
 region
@@ -36,57 +36,18 @@ Intel Instance size
 Any tags you wish to have applied
 ```
 
-
-main.tf
-
 ```hcl
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
-  cidr    = "10.99.0.0/18"          #Choose the cidr block you want to use for your VPC
-  name    = "vpc-elasticache-redis" #Choose the name you want to give the VPC
-  /* public_subnet_cidr_blocks = [cidrsubnet(local.cidr_block, 8, 0), cidrsubnet(local.cidr_block, 8, 1)]
-  public_availability_zones = data.aws_availability_zones.available.names */
-  azs             = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets  = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"] #Adjust if you choose a different CIDR block
-  private_subnets = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"] #Adjust if you choose a different CIDR block
-
-  enable_nat_gateway      = true
-  single_nat_gateway      = true
-  enable_dns_hostnames    = true
-  map_public_ip_on_launch = false
-
-  tags = local.tags
-}
-
-# Identifying subnets from the vpc created above. The subnets will be used to create the Elasticache Cluster.  In the elasticache_redis module you can adjust the name of the cluster, version, maintenance windows and encryption as desired.
-
-module "elasticache_redis" {
-  source             = "../../"
-  name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
-  num_cache_clusters = 3
-  node_type          = local.node_type
-  engine_version             = "6.x"
-  port                       = 6379
-  maintenance_window         = "mon:10:40-mon:11:40"
-  snapshot_window            = "09:10-10:10"
-  snapshot_retention_limit   = 1
-  automatic_failover_enabled = false
-  at_rest_encryption_enabled = false
-  transit_encryption_enabled = false
-  apply_immediately          = true
-  family                     = "redis6.x"
-  description = "Redis Cluster"
-
-  subnet_ids         = module.vpc.public_subnets
-  vpc_id             = module.vpc.vpc_id
-  source_cidr_blocks = [module.vpc.vpc_cidr_block]
+locals {
+  region    = "us-west-2"      
+  node_type = "cache.r5.large" 
 
   tags = {
-    Environment = "prod"
+    Owner    = "user@company.com"
+    Duration = "24"
   }
 }
 ```
+
 
 Run Terraform
 

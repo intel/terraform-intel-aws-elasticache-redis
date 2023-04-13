@@ -28,16 +28,43 @@ This module builds using recommended settings:
 - Enable in-transit encryption
 - Enable automated backups
 
+See the Examples folder to reference if you want to deploy in a brand new VPC or an existing VPC.
 
+**/examples/redis-new-vpc**
+
+Modify the locals of the main.tf with your selection.
+You can adjust the region, node type, and any tags you wish to assign to the resources.
 
 ```hcl
-region
-Intel Instance size
-Any tags you wish to have applied
+locals {
+  region    = "us-west-2"      
+  node_type = "cache.r5.large" 
 
-
+  tags = {
+    Owner    = "user@company.com"
+    Duration = "24"
+  }
+}
 ```
+**/examples/redis-novpc**
 
+Modify the locals of the main.tf with your selection.
+You can adjust the region, node type, and any tags you wish to assign to the resources.
+
+```hcl
+locals {
+  region     = "us-west-2"      
+  node_type  = "cache.r5.large"   
+  vpc_id     = "vpc-abcd12345"     
+  cidr_block = "10.0.0.0/16" 
+  public_subnets  = ["subnet-1234zoneA", "subnet-1234zoneB", "subnet-1234zoneC"] 
+  private_subnets = ["subnet-abcdzoneA", "subnet-abcdzoneB", "subnet-abcdzoneC"] 
+  tags = {
+    Owner    = "user@company.com"
+    Duration = "24"
+  }
+}
+```
 
 Run Terraform
 
