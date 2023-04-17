@@ -55,10 +55,10 @@ You can adjust the region, node type, and any tags you wish to assign to the res
 locals {
   region     = "us-west-2"      
   node_type  = "cache.r5.large"   
-  vpc_id     = "vpc-abcd12345"     
+  vpc_id          = "<YOUR-VPC-ID-HERE>"      
   cidr_block = "10.0.0.0/16" 
-  public_subnets  = ["subnet-1234zoneA", "subnet-1234zoneB", "subnet-1234zoneC"] 
-  private_subnets = ["subnet-abcdzoneA", "subnet-abcdzoneB", "subnet-abcdzoneC"] 
+  public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
+  private_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
   tags = {
     Owner    = "user@company.com"
     Duration = "24"

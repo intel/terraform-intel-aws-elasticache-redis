@@ -15,12 +15,12 @@
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
 
 locals {
-  region          = "us-west-2"                                                                          # Choose your AWS region you want to build in
-  node_type       = "cache.r5.large"                                                                     # See above recommended instance types for Intel Xeon processors 
-  vpc_id          = "vpc-0f44f4c930cd92d12"                                                              # Replace with the ID of the vpc you want to deploy to.
-  cidr_block      = "10.0.0.0/16"                                                                        # Enter the CIDR range of the VPC you are deploying in.
-  public_subnets  = ["subnet-0214898df0642887f", "subnet-053447910c094adb4", "subnet-07c86fb3b6841d740"] # Enter the subnet ID's for your PUBLIC subnets of the VPC you want to deploy to
-  private_subnets = ["subnet-06c1d82e2cb3dd953", "subnet-02cf7a8fcd152d1a8", "subnet-0fd4d8bfb61b23f99"] # Enter the subnet ID's for your PRIVATE subnets of the VPC you want to deploy to
+  region          = "us-west-2"                                                           # Choose your AWS region you want to build in
+  node_type       = "cache.r5.large"                                                      # See above recommended instance types for Intel Xeon processors 
+  vpc_id          = "<YOUR-VPC-ID-HERE>"                                                  # Replace with the ID of the vpc you want to deploy to.
+  cidr_block      = "10.0.0.0/16"                                                         # Enter the CIDR range of the VPC you are deploying in.
+  public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
+  private_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
   tags = {
     Owner    = "user@company.com"
     Duration = "24"

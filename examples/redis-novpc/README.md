@@ -44,10 +44,10 @@ Any tags you wish to have applied
 locals {
   region          = "us-west-2"
   node_type       = "cache.r5.large" 
-  vpc_id          = "vpc-01234abcd"
+  vpc_id          = "<YOUR-VPC-ID-HERE>" 
   cidr_block      = "10.0.0.0/16" 
-  public_subnets  = ["subnet-0123zoneA", "subnet-0123zoneB", "subnet-0213zoneC"] 
-  private_subnets = ["subnet-abcdzoneA", "subnet-abcdzoneB", "subnet-abcdzoneC"] 
+  public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
+  private_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
   tags = {
     Owner    = "user@company.com"
     Duration = "24"
