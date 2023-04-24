@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/intel/terraform-intel-aws-elasticache-redis/blob/main/images/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
+  <img src="./images/logo-classicblue-800px.png" alt="Intel Logo" width="250"/>
 </p>
 
 # Intel® Cloud Optimization Modules for Terraform  
@@ -10,12 +10,15 @@
 
 This file documents the HashiCorp Sentinel policies that apply to this module
 
-## Policy 1
+## AWS Elasticache Redis Policy
 
-Description: **Add the description of the policy. This will be removed !**
+Description: The configured "instance_types" should be Intel Xeon 3rd Generation(code-named Ice Lake). At the time of publication of this policy, Elasticache does not enable any Ice Lake or Intel 4th gen Xeon Scalable processors (code named Sapphire Rapids).
 
-Resource type:  **Add the resource type of the policy. This will be removed !**
+Resource type: autoscaling
 
-Parameter:  **Add the Parameter. This will be removed !**
+Parameter: instance_types
 
-Allowed Types :  **Add allowed resource types of the policy. This will be removed !**
+Allowed Types
+
+- **General:** cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge
+- **Memory Optimized:** cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge
