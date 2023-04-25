@@ -41,6 +41,10 @@ variable "source_cidr_blocks" {
   description = "List of source CIDR blocks."
 }
 
+########################
+####     Other      ####
+########################
+
 variable "engine_version" {
   default     = "5.0.6"
   type        = string
