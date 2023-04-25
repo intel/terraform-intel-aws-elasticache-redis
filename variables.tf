@@ -1,3 +1,20 @@
+########################
+####     Intel      ####
+########################
+
+# See policies.md, we recommend  Intel Xeon Scalable processors
+# **General:** cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge
+# **Memory Optimized:** cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge
+
+variable "node_type" {
+  type        = string
+  description = "The compute and memory capacity of the nodes in the node group."
+}
+
+########################
+####    Required    ####
+########################
+
 variable "name" {
   type        = string
   description = "The replication group identifier. This parameter is stored as a lowercase string."
@@ -8,10 +25,6 @@ variable "num_cache_clusters" {
   description = "The number of cache clusters (primary and replicas) this replication group will have."
 }
 
-variable "node_type" {
-  type        = string
-  description = "The compute and memory capacity of the nodes in the node group."
-}
 
 variable "subnet_ids" {
   type        = list(string)
@@ -27,6 +40,10 @@ variable "source_cidr_blocks" {
   type        = list(string)
   description = "List of source CIDR blocks."
 }
+
+########################
+####     Other      ####
+########################
 
 variable "engine_version" {
   default     = "5.0.6"
