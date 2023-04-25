@@ -12,7 +12,7 @@ This file documents the HashiCorp Sentinel policies that apply to this module
 
 ## AWS Elasticache Redis Policy
 
-Description: The configured "node_type" should be Intel Xeon 3rd Generation(code-named Ice Lake). At the time of publication of this policy, Elasticache does not enable any Ice Lake or Intel 4th gen Xeon Scalable processors (code named Sapphire Rapids).
+Description: The configured "node_type" should be Intel Xeon 2nd Generation(code-named Cascade Lake). At the time of publication of this policy, Elasticache does not enable any Intel Xeon 3rd gen(code-named Ice Lake) or Intel Xeon 4th Gen Scalable processors (code-named Sapphire Rapids).
 
 Resource type: aws_elasticache_replication_group
 
