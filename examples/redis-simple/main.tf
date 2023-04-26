@@ -14,8 +14,8 @@
 #
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
 module "vpc" {
-  source  = "intel/aws-elasticache-redis/intel"
-  version = "~> 3.0"
+  source  = "../../"
+#  version = "~> 3.0"
   cidr    = "10.99.0.0/18"          #Choose the cidr block you want to use for your VPC
   name    = "vpc-elasticache-redis" #Choose the name you want to give the VPC
   /* public_subnet_cidr_blocks = [cidrsubnet(local.cidr_block, 8, 0), cidrsubnet(local.cidr_block, 8, 1)]
@@ -32,7 +32,7 @@ module "vpc" {
 }
 
 module "elasticache_redis" {
-  source             = "intel/aws-elasticache-redis/intel"
+  source             = "../../"
   node_type          = "cache.r5.large"
   subnet_ids         = module.vpc.private_subnets
   vpc_id             = module.vpc.vpc_id
