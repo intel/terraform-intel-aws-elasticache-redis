@@ -6,9 +6,9 @@
 
 © Copyright 2022, Intel Corporation
 
-## AWS Elasticache Redis module - Existing VPC Example
+## AWS Elasticache Redis module - Simple deployment with new VPC and default configuration
 
-This example creates an Amazon Elasticache Redis Cluster based on Intel in an existing VPC. This module leverages the cache.r5.large by default which is the latest Intel Xeon processor available at the time of this module publication. 
+This example creates an Amazon Elasticache Redis Cluster based on Intel in a new VPC. This module leverages the cache.r5.large by default which is the latest Intel Xeon processor available at the time of this module publication. 
 
 As you configure your application's environment, choose the configurations for your infrastructure that matches your application's requirements.
 
@@ -20,35 +20,12 @@ As you configure your application's environment, choose the configurations for y
 This module provisions [ElastiCache_Replication_Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.html) and
 [Parameter Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html).
 
-This module requires a vpc with multiple AZ's (3)
-
-- Enable Multi-AZ
-- Enable automatic failover
-- Enable at-rest encryption
-- Enable in-transit encryption
-- Enable automated backups
-
-By default, you will only have to pass these variables in the **/examples/redis-novpc/main.tf** file
+By default, you will only have to pass these variables in the **/examples/redis-simple/main.tf** file
 
 ```hcl
 module "elasticache_redis" {
-  region          = "us-west-2"                                                           # Choose your AWS region you want to build in
-  public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
-  tags = {
-    Owner    = "user@company.com"
-    Duration = "24"
-  }
-  source                     = "intel/aws-elasticache-redis/intel"
-  name                       = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
-  num_cache_clusters         = 3
-  node_type                  = "cache.r5.large"
-  maintenance_window         = "mon:10:40-mon:11:40"
-  snapshot_window            = "09:10-10:10"
-  apply_immediately          = true
+  region          = "us-west-2"  
   
-  subnet_ids         = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
-  vpc_id             = "<YOUR-VPC-ID-HERE>"  
-  source_cidr_blocks = "10.0.0.0/16"
 }
 
 

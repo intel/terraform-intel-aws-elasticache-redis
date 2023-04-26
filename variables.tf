@@ -49,7 +49,7 @@ variable "source_cidr_blocks" {
 ########################
 
 variable "engine_version" {
-  default     = "5.0.6"
+  default     = "6.x"
   type        = string
   description = "The version number of the cache engine to be used for the cache clusters in this replication group."
 }
@@ -103,7 +103,7 @@ variable "apply_immediately" {
 }
 
 variable "family" {
-  default     = "redis5.0"
+  default     = "redis6.x"
   type        = string
   description = "The family of the ElastiCache parameter group."
 }

@@ -12,9 +12,12 @@
 # General Purpose: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge
 # Memory Optimized: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge
 #
+
+# Choose the AWS region to deploy in
 locals {
   region    = "us-east-2"  
 }
+
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
