@@ -17,11 +17,13 @@ variable "node_type" {
 
 variable "name" {
   type        = string
+  default     = "ApplicationName-Prod"
   description = "The replication group identifier. This parameter is stored as a lowercase string."
 }
 
 variable "num_cache_clusters" {
   type        = string
+  default     = "3"
   description = "The number of cache clusters (primary and replicas) this replication group will have."
 }
 
@@ -39,6 +41,7 @@ variable "vpc_id" {
 variable "source_cidr_blocks" {
   type        = list(string)
   description = "List of source CIDR blocks."
+  default     = "10.0.0.0/16"
 }
 
 ########################
@@ -94,7 +97,7 @@ variable "transit_encryption_enabled" {
 }
 
 variable "apply_immediately" {
-  default     = false
+  default     = true
   type        = bool
   description = "Specifies whether any modifications are applied immediately, or during the next maintenance window."
 }

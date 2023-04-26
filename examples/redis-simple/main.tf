@@ -13,23 +13,28 @@
 # Memory Optimized: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge
 #
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
+module "vpc" {
+  source  = "intel/aws-elasticache-redis/intel"
+  version = "~> 3.0"
+  cidr    = "10.99.0.0/18"          #Choose the cidr block you want to use for your VPC
+  name    = "vpc-elasticache-redis" #Choose the name you want to give the VPC
+  /* public_subnet_cidr_blocks = [cidrsubnet(local.cidr_block, 8, 0), cidrsubnet(local.cidr_block, 8, 1)]
+  public_availability_zones = data.aws_availability_zones.available.names */
+  azs             = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets  = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"] #Adjust if you choose a different CIDR block
+  private_subnets = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"] #Adjust if you choose a different CIDR block
+
+  enable_nat_gateway      = true
+  single_nat_gateway      = true
+  enable_dns_hostnames    = true
+  map_public_ip_on_launch = false
+
+}
 
 module "elasticache_redis" {
-  region         = "us-west-2"                                                           # Choose your AWS region you want to build in
-  public_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
-  tags = {
-    Owner    = "user@company.com"
-    Duration = "24"
-  }
   source             = "intel/aws-elasticache-redis/intel"
-  name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
-  num_cache_clusters = 3
   node_type          = "cache.r5.large"
-  maintenance_window = "mon:10:40-mon:11:40"
-  snapshot_window    = "09:10-10:10"
-  apply_immediately  = true
-
-  subnet_ids         = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
-  vpc_id             = "<YOUR-VPC-ID-HERE>"
-  source_cidr_blocks = "10.0.0.0/16"
+  subnet_ids         = module.vpc.private_subnets
+  vpc_id             = module.vpc.vpc_id
+  source_cidr_blocks = [module.vpc.vpc_cidr_block]
 }
