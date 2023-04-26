@@ -25,9 +25,8 @@ locals {
 }
 
 module "vpc" {
-#  source  = "intel/aws-elasticache-redis/intel"
-  source = "../../"
-  #version = "~> 3.0"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 3.0"
   cidr    = "10.99.0.0/18"          #Choose the cidr block you want to use for your VPC
   name    = "vpc-elasticache-redis" #Choose the name you want to give the VPC
   /* public_subnet_cidr_blocks = [cidrsubnet(local.cidr_block, 8, 0), cidrsubnet(local.cidr_block, 8, 1)]

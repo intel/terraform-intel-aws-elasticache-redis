@@ -12,10 +12,13 @@
 # General Purpose: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge
 # Memory Optimized: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge
 #
+locals {
+  region    = "us-east-2"  
+}
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
 module "vpc" {
-  source  = "../../"
-#  version = "~> 3.0"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 3.0"
   cidr    = "10.99.0.0/18"          #Choose the cidr block you want to use for your VPC
   name    = "vpc-elasticache-redis" #Choose the name you want to give the VPC
   /* public_subnet_cidr_blocks = [cidrsubnet(local.cidr_block, 8, 0), cidrsubnet(local.cidr_block, 8, 1)]
