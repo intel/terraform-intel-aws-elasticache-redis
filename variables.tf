@@ -9,6 +9,7 @@
 variable "node_type" {
   type        = string
   description = "The compute and memory capacity of the nodes in the node group."
+  default     = "cache.r5.large"
 }
 
 ########################

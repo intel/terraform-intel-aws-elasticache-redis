@@ -39,7 +39,6 @@ module "vpc" {
 
 module "elasticache_redis" {
   source             = "../../"
-  node_type          = "cache.r5.large"
   subnet_ids         = module.vpc.private_subnets
   vpc_id             = module.vpc.vpc_id
   source_cidr_blocks = [module.vpc.vpc_cidr_block]
