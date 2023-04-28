@@ -20,14 +20,13 @@ As you configure your application's environment, choose the configurations for y
 This module provisions [ElastiCache_Replication_Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.html) and
 [Parameter Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html).
 
-By default, you will only have to pass these variables in the **/examples/redis-simple/main.tf** file
+By default, you will only have to pass this variable in the **/examples/redis-simple/main.tf** file
 
 ```hcl
-module "elasticache_redis" {
-  region          = "us-west-2"  
-  
+# Choose the AWS region to deploy in
+locals {
+  region    = "us-east-2"  
 }
-
 
 ```
 
