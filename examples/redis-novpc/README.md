@@ -48,10 +48,7 @@ locals {
   cidr_block      = "10.0.0.0/16" 
   public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
   private_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
-  tags = {
-    Owner    = "user@company.com"
-    Duration = "24"
-  }
+    
 }
 ```
 

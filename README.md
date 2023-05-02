@@ -30,6 +30,18 @@ This module builds using recommended settings:
 
 See the Examples folder to reference if you want to deploy in a brand new VPC or an existing VPC.
 
+**/examples/redis-simple**
+
+Modify the locals of the main.tf with your selection.
+You can just choose where you want to build
+
+```hcl
+locals {
+  region    = "us-west-2"      
+   
+  }
+}
+```
 **/examples/redis-new-vpc**
 
 Modify the locals of the main.tf with your selection.
