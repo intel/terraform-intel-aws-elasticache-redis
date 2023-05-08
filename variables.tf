@@ -115,8 +115,21 @@ variable "description" {
   description = "The description of the all resources."
 }
 
+variable "enable_intel_tags" {
+  type    = bool
+    default = true
+  description = "If true adds additional Intel tags to resources"
+}
+
 variable "tags" {
   default     = {}
   type        = map(string)
   description = "A mapping of tags to assign to all resources."
+}
+variable "intel_tags" {
+  default     = {
+    provided_by = "https://github.com/intel/terraform-intel-aws-elasticache-redis"
+  }
+  type        = map(string)
+  description = "Intel Tags"
 }

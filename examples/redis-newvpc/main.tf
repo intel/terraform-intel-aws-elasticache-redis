@@ -17,11 +17,6 @@
 locals {
   region    = "us-west-2"      #Choose your AWS region you want to build in
   node_type = "cache.r5.large" # See above recommended instance types for Intel Xeon processors
-
-  tags = {
-    Owner    = "user@company.com"
-    Duration = "24"
-  }
 }
 
 module "vpc" {
@@ -40,7 +35,6 @@ module "vpc" {
   enable_dns_hostnames    = true
   map_public_ip_on_launch = false
 
-  tags = local.tags
 }
 
 module "elasticache_redis" {
@@ -64,7 +58,10 @@ module "elasticache_redis" {
   subnet_ids         = module.vpc.private_subnets
   vpc_id             = module.vpc.vpc_id
   source_cidr_blocks = [module.vpc.vpc_cidr_block]
-
-
+  
+  tags = {
+    Owner    = "user@company.com"
+    Duration = "4"
+  }
 }
 

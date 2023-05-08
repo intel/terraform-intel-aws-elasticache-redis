@@ -15,7 +15,7 @@
 
 # Choose the AWS region to deploy in
 locals {
-  region    = "us-east-2"  
+  region = "us-east-2"
 }
 
 # This example will create a VPC using 3 AZ's, 2 subnets per AZ, and a NATGW and IGW as part of the deployment.
@@ -38,8 +38,12 @@ module "vpc" {
 }
 
 module "elasticache_redis" {
-  source             = "../../"
+  source             = "intel/aws-elasticache-redis/intel"
   subnet_ids         = module.vpc.private_subnets
   vpc_id             = module.vpc.vpc_id
   source_cidr_blocks = [module.vpc.vpc_cidr_block]
+  tags = {
+    Owner    = "user@company.com"
+    Duration = "4"
+  }
 }
