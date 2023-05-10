@@ -128,7 +128,8 @@ variable "tags" {
 }
 variable "intel_tags" {
   default     = {
-    provided_by = "https://github.com/intel/terraform-intel-aws-elasticache-redis"
+    intel-registry = "https://registry.terraform.io/namespaces/intel"
+    intel-module   = "terraform-intel-aws-elasticache-redis"
   }
   type        = map(string)
   description = "Intel Tags"

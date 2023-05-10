@@ -25,7 +25,7 @@ locals {
 }
 
 module "elasticache_redis" {
-  source                     = "intel/aws-elasticache-redis/intel"
+  source             = "intel/aws-elasticache-redis/intel"
   name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
   node_type          = local.node_type
   engine_version     = "6.x"
