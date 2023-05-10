@@ -6,9 +6,9 @@
 
 © Copyright 2022, Intel Corporation
 
-## AWS Elasticache Redis module - Existing VPC Example
+## AWS Elasticache Redis module - Simple deployment with new VPC and default configuration
 
-This example creates an Amazon Elasticache Redis Cluster based on Intel in an existing VPC. This module leverages the cache.r5.large by default which is the latest Intel Xeon processor available at the time of this module publication. 
+This example creates an Amazon Elasticache Redis Cluster based on Intel in a new VPC. This module leverages the cache.r5.large by default which is the latest Intel Xeon processor available at the time of this module publication. 
 
 As you configure your application's environment, choose the configurations for your infrastructure that matches your application's requirements.
 
@@ -20,36 +20,14 @@ As you configure your application's environment, choose the configurations for y
 This module provisions [ElastiCache_Replication_Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.html) and
 [Parameter Group](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html).
 
-This module requires a vpc with multiple AZ's (3)
-
-- Enable Multi-AZ
-- Enable automatic failover
-- Enable at-rest encryption
-- Enable in-transit encryption
-- Enable automated backups
-
-By default, you will only have to pass these variables in the **/examples/redis-novpc/main.tf** file
+By default, you will only have to pass this variable in the **/examples/redis-simple/main.tf** file
 
 ```hcl
-region
-Intel Instance size
-VPC ID
-CIDR Block
-public_subnets
-private_subnets
-Any tags you wish to have applied
-```
-
-```hcl
+# Choose the AWS region to deploy in
 locals {
-  region          = "us-west-2"
-  node_type       = "cache.r5.large" 
-  vpc_id          = "<YOUR-VPC-ID-HERE>" 
-  cidr_block      = "10.0.0.0/16" 
-  public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
-  private_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
-    
+  region    = "us-east-2"  
 }
+
 ```
 
 Run Terraform

@@ -21,36 +21,25 @@ locals {
   cidr_block      = "10.0.0.0/16"                                                         # Enter the CIDR range of the VPC you are deploying in.
   public_subnets  = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate public subnets in 3 different AZ's
   private_subnets = ["<YOUR-subnet-zoneA>", "<YOUR-subnet-zoneB>", "<YOUR-subnet-zoneC>"] #Specify your 3 seperate private subnets in 3 different AZ's
-  tags = {
-    Owner    = "user@company.com"
-    Duration = "24"
-  }
+
 }
 
 module "elasticache_redis" {
   source                     = "intel/aws-elasticache-redis/intel"
-  name                       = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
-  num_cache_clusters         = 3
-  node_type                  = local.node_type
-  engine_version             = "6.x"
-  port                       = 6379
-  maintenance_window         = "mon:10:40-mon:11:40"
-  snapshot_window            = "09:10-10:10"
-  snapshot_retention_limit   = 1
-  automatic_failover_enabled = false
-  at_rest_encryption_enabled = false
-  transit_encryption_enabled = false
-  apply_immediately          = true
-  family                     = "redis6.x"
-  description                = "Redis Cluster"
+  name               = "ApplicationName-Prod" #Name of the Redis cluster you are creating.
+  node_type          = local.node_type
+  engine_version     = "6.x"
+  port               = 6379
+  maintenance_window = "mon:10:40-mon:11:40"
+  snapshot_window    = "09:10-10:10"
+  description        = "Redis Cluster"
 
   subnet_ids         = local.private_subnets
   vpc_id             = local.vpc_id
   source_cidr_blocks = [local.cidr_block]
+  tags = {
+    Owner    = "user@company.com"
+    Duration = "4"
+  }
 }
 
-locals {
-
-}
-
-# data "aws_availability_zones" "available" {}

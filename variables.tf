@@ -9,6 +9,7 @@
 variable "node_type" {
   type        = string
   description = "The compute and memory capacity of the nodes in the node group."
+  default     = "cache.r5.large"
 }
 
 ########################
@@ -17,11 +18,13 @@ variable "node_type" {
 
 variable "name" {
   type        = string
+  default     = "ApplicationName-Prod"
   description = "The replication group identifier. This parameter is stored as a lowercase string."
 }
 
 variable "num_cache_clusters" {
   type        = string
+  default     = "3"
   description = "The number of cache clusters (primary and replicas) this replication group will have."
 }
 
@@ -39,6 +42,7 @@ variable "vpc_id" {
 variable "source_cidr_blocks" {
   type        = list(string)
   description = "List of source CIDR blocks."
+  
 }
 
 ########################
@@ -46,7 +50,7 @@ variable "source_cidr_blocks" {
 ########################
 
 variable "engine_version" {
-  default     = "5.0.6"
+  default     = "6.x"
   type        = string
   description = "The version number of the cache engine to be used for the cache clusters in this replication group."
 }
@@ -94,13 +98,13 @@ variable "transit_encryption_enabled" {
 }
 
 variable "apply_immediately" {
-  default     = false
+  default     = true
   type        = bool
   description = "Specifies whether any modifications are applied immediately, or during the next maintenance window."
 }
 
 variable "family" {
-  default     = "redis5.0"
+  default     = "redis6.x"
   type        = string
   description = "The family of the ElastiCache parameter group."
 }
@@ -111,8 +115,21 @@ variable "description" {
   description = "The description of the all resources."
 }
 
+variable "enable_intel_tags" {
+  type    = bool
+    default = true
+  description = "If true adds additional Intel tags to resources"
+}
+
 variable "tags" {
   default     = {}
   type        = map(string)
   description = "A mapping of tags to assign to all resources."
+}
+variable "intel_tags" {
+  default     = {
+    provided_by = "https://github.com/intel/terraform-intel-aws-elasticache-redis"
+  }
+  type        = map(string)
+  description = "Intel Tags"
 }

@@ -41,11 +41,7 @@ locals {
   region    = "us-west-2"      
   node_type = "cache.r5.large" 
 
-  tags = {
-    Owner    = "user@company.com"
-    Duration = "24"
   }
-}
 ```
 
 

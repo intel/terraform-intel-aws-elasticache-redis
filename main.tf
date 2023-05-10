@@ -3,6 +3,13 @@
 # https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.html
 
 # https://www.terraform.io/docs/providers/aws/r/elasticache_replication_group.html
+
+locals {
+  security_group_name = "${var.name}-elasticache-redis"
+  #If the enable_intel_tags is true, then additional Intel tags will be added to the resources created
+  tags = var.enable_intel_tags ? merge(var.intel_tags, var.tags) : var.tags
+}
+
 resource "aws_elasticache_replication_group" "default" {
   engine               = "redis"
   parameter_group_name = aws_elasticache_parameter_group.default.name
@@ -90,7 +97,7 @@ resource "aws_elasticache_replication_group" "default" {
   #replication_group_description = var.description
 
   # A mapping of tags to assign to the resource.
-  tags = merge({ "Name" = var.name }, var.tags)
+  tags = local.tags
 }
 
 # https://www.terraform.io/docs/providers/aws/r/elasticache_parameter_group.html
@@ -98,6 +105,7 @@ resource "aws_elasticache_parameter_group" "default" {
   name        = var.name
   family      = var.family
   description = var.description
+  tags = local.tags
 }
 
 # https://www.terraform.io/docs/providers/aws/r/elasticache_subnet_group.html
@@ -105,18 +113,17 @@ resource "aws_elasticache_subnet_group" "default" {
   name        = var.name
   subnet_ids  = var.subnet_ids
   description = var.description
+  tags = local.tags
 }
 
 # https://www.terraform.io/docs/providers/aws/r/security_group.html
 resource "aws_security_group" "default" {
   name   = local.security_group_name
   vpc_id = var.vpc_id
-  tags   = merge({ "Name" = local.security_group_name }, var.tags)
+  tags = local.tags
 }
 
-locals {
-  security_group_name = "${var.name}-elasticache-redis"
-}
+
 
 # https://www.terraform.io/docs/providers/aws/r/security_group_rule.html
 resource "aws_security_group_rule" "ingress" {
@@ -126,6 +133,7 @@ resource "aws_security_group_rule" "ingress" {
   protocol          = "tcp"
   cidr_blocks       = var.source_cidr_blocks
   security_group_id = aws_security_group.default.id
+
 }
 
 resource "aws_security_group_rule" "egress" {
@@ -135,4 +143,5 @@ resource "aws_security_group_rule" "egress" {
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.default.id
+
 }
