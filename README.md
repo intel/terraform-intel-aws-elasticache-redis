@@ -2,9 +2,9 @@
   <img src="https://github.com/intel/terraform-intel-aws-elasticache-redis/blob/main/images/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
-# Intel® Cloud Optimization Modules for Terraform
+# Intel® Optimized Cloud Modules for Terraform
 
-© Copyright 2022, Intel Corporation
+© Copyright 2024, Intel Corporation
 
 ## AWS Elasticache Redis module
 
@@ -173,13 +173,13 @@ No resources.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.64 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.31 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.64 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.31 |
 
 ## Modules
 
